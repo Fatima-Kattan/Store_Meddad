@@ -3,11 +3,12 @@ use App\Http\Controllers\Dashboard\CategoriesController as DashboardCategoriesCo
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Dashboard\StoresController;
+use App\Http\Controllers\Dashboard\TwoFactorAuthenticationController;
 use App\Http\Controllers\Dashboard\UsersController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix'=>'dashboard', 'as'=>'dashboard.'], function () {
+Route::group(['prefix'=>'/admin/dashboard', 'as'=>'dashboard.','middleware' => 'auth:admin'], function () {
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
     Route::get('/categories/index', [DashboardCategoriesController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [DashboardCategoriesController::class, 'create'])->name('categories.create');
@@ -20,6 +21,7 @@ Route::group(['prefix'=>'dashboard', 'as'=>'dashboard.'], function () {
     Route::resource('products', ProductsController::class);
     Route::resource('users', UsersController::class);
 
+    Route::get('/2fa', [TwoFactorAuthenticationController::class, 'index'])->name('admin.2fa');
     });
 
 

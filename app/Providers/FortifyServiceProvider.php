@@ -8,6 +8,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -21,7 +22,20 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $request = request();
+        if( $request->is('admin/*')) {
+            Config::set('fortify.guard' , 'admin');
+            Config::set('fortify.passwords' , 'admins');
+            Config::set('fortify.home' , '/admin/dashboard/index');
+            Config::set('fortify.prefix' , '/admin');
+        }
+            /* هي مشان اذا عندي لوحة تحكم للطلاب */
+        /*  if( $request->is('student/*')) {
+            Config::set('fortify.guard' , 'web');
+            Config::set('fortify.passwords' , 'students');
+            Config::set('fortify.home' , '/student/dashboard/index');
+            Config::set('fortify.prefix' , '/student');
+        } */
     }
 
     /**
@@ -52,5 +66,11 @@ class FortifyServiceProvider extends ServiceProvider
                 ($credentialId ?: $request->session()->getId()).'|'.$request->ip()
             );
         });
+
+        if (config('fortify.guard') == 'admin') {
+            Fortify::viewPrefix('auth.');
+        } else {
+            Fortify::viewPrefix('front.auth.');
+        }
     }
 }

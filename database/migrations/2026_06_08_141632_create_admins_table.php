@@ -20,6 +20,12 @@ return new class extends Migration
             $table->boolean('super_admin')->default(false);
             $table->timestamps();
         });
+        Schema::create('admins_password_reset_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
     }
 
     /**
@@ -28,5 +34,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('admins');
+        Schema::dropIfExists('admins_password_reset_tokens');
     }
 };
