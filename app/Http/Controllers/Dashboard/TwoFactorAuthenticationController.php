@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TwoFactorAuthenticationController extends Controller
 {
     public function index()
     {
-        return view('dashboard.2fa.index');
+        $user= Auth::guard('admin')->user();
+        return view('dashboard.pages.two-factor-auth', [
+            'user' => $user,
+        ]);
     }
 }
