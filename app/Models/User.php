@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
+    Public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id', 'id');
+    }
+    Public function hasStore()
+    {
+        return $this->store_id !== null;
+    }
 }

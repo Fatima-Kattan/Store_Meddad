@@ -20,3 +20,4 @@ Route::middleware('auth')->group(function () {
 
 /* require __DIR__.'/auth.php'; */ /* breeze */
 require __DIR__.'/dashboard.php';
+require __DIR__.'/user.php';

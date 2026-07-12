@@ -28,14 +28,12 @@ class FortifyServiceProvider extends ServiceProvider
             Config::set('fortify.passwords' , 'admins');
             Config::set('fortify.home' , '/admin/dashboard/index');
             Config::set('fortify.prefix' , '/admin');
-        }
-            /* هي مشان اذا عندي لوحة تحكم للطلاب */
-        /*  if( $request->is('student/*')) {
+        }else{
             Config::set('fortify.guard' , 'web');
-            Config::set('fortify.passwords' , 'students');
-            Config::set('fortify.home' , '/student/dashboard/index');
-            Config::set('fortify.prefix' , '/student');
-        } */
+            Config::set('fortify.passwords' , 'users');
+            Config::set('fortify.home' , '/user/dashboard');
+            Config::set('fortify.prefix' , '/user');
+        }
     }
 
     /**
