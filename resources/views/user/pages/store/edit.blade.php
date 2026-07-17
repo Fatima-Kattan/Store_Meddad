@@ -9,7 +9,7 @@
         <form action="{{ route('user.store.update') }}" method="POST">
             @csrf
             @method('PUT')
-            @include('dashboard.pages.store._form')
+            @include('user.pages.store._form', ['store' => $store])
 
             <button type="submit" class="btn btn-success">Update Store</button>
         </form>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\StoreController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ Route::group([
     Route::middleware(['user.has.store'])->group(function () {
         Route::get('store/edit', [StoreController::class, 'edit'])->name('store.edit');
         Route::put('store', [StoreController::class, 'update'])->name('store.update');
+        Route::resource('products', ProductController::class);
     });
     
     });

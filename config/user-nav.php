@@ -11,4 +11,9 @@ return [
         'route' => 'user.store.edit',
         'icon' => 'nav-icon fas fa-store',
     ],
+    [
+        'title' => 'Products',
+        'route' => 'user.products.index',
+        'icon' => 'nav-icon fas fa-box',
+    ],
 ];
